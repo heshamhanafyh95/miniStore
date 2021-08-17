@@ -25,25 +25,25 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => ''], function () {
     /*===================================================================================================*/
     /*=====================================   Categories Routes   =======================================*/
     /*===================================================================================================*/
-    Route::get('/categories/all', 'CategoryController@index')->name('admin.categories.all');
-    Route::post('/categories/store', 'CategoryController@store')->name('admin.categories.store');
+    Route::get('/categories/all', 'CategoryController@index');
+    Route::post('/categories/store', 'CategoryController@store');
 
     /*===================================================================================================*/
     /*=====================================   items Routes   =======================================*/
     /*===================================================================================================*/
-    Route::get('/items/all', 'ItemController@index')->name('admin.items.all')->middleware('checkPermissions:get_item');
-    Route::post('/items/store', 'ItemController@store')->name('admin.items.store');
+    Route::get('/items/all', 'ItemController@index')->middleware('checkPermissions:get_item');
+    Route::post('/items/store', 'ItemController@store');
 
     /*===================================================================================================*/
     /*                                        Orders Routes                                              */
     /*===================================================================================================*/
-    Route::post('/order/create', 'OrdersController@addOrder')->name('admin.order.store');
+    Route::post('/order/create', 'OrdersController@addOrder');
 
     /*===================================================================================================*/
     /*                                        Roles Routes                                              */
     /*===================================================================================================*/
 });
-Route::post('/role/create', 'RoleController@store')->name('admin.role.store');
+Route::post('/role/create', 'RoleController@store');
 
 /*===================================================================================================*/
 /*                                        Auth Routes                                              */
