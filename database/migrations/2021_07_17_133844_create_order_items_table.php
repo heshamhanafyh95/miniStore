@@ -17,11 +17,11 @@ class CreateOrderItemsTable extends Migration
             $table->increments('id');
             $table->integer('quantity')->unsigned();
             $table->float('price', 8, 2);
-            $table->integer('orderId')->unsigned();
-            $table->foreign('orderId')->references('id')->on('orders')->onDelete('cascade');
-            $table->integer('itemId')->unsigned();
-            $table->foreign('itemId')->references('id')->on('items')->onDelete('RESTRICT');
-            $table->unique(['orderId', 'itemId']);
+            $table->integer('order_id')->unsigned();
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->integer('item_id')->unsigned();
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('RESTRICT');
+            $table->unique(['order_id', 'item_id']);
             $table->timestamps();
         });
     }

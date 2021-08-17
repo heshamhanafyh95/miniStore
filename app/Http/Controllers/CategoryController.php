@@ -6,6 +6,7 @@ use App\Http\Requests\category\StoreCategoryPostRequest;
 use App\Models\category;
 use App\Services\category\CategoryService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -19,14 +20,14 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
-        $categories = category::paginate($request->perPage,['*'],'categoryPage',$request->pageNumber);
+        $categories = category::paginate($request->perPage, ['*'], 'categoryPage', $request->pageNumber);
         return response()->json($categories, 200);
     }
 
     public function store(StoreCategoryPostRequest $request)
     {
         try {
-            $category=$this->categoryService->Create($request);
+            $category = $this->categoryService->Create($request);
         } catch (\Throwable $th) {
             return response()->json($th, 400);
         }

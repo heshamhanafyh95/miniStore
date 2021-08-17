@@ -24,11 +24,10 @@ class CreateItemsTable extends Migration
             $table->float('discount', 3, 2)->default(0);
             $table->integer('status')->default(1);
 
-            $table->integer('categoryId')->unsigned();
-            $table->foreign('categoryId')->references('id')->on('categories')->onDelete('RESTRICT');
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('RESTRICT');
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 

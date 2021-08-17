@@ -18,11 +18,10 @@ class CreateOrdersTable extends Migration
             $table->string('type');
             $table->float('discount', 3, 2)->default(0);
             $table->string('status');
-            $table->integer('userId')->unsigned();
-            $table->foreign('userId')->references('id')->on('users')->onDelete('RESTRICT');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('RESTRICT');
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 

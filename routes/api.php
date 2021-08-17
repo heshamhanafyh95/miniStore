@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use PHPUnit\TextUI\XmlConfiguration\Group;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,18 +16,38 @@ use PHPUnit\TextUI\XmlConfiguration\Group;
  */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    return response()->json(Auth::user()->has_permission("get_item"), 200);
 });
+
 
 Route::group(['middleware' => ['auth:sanctum'], 'prefix' => ''], function () {
-    
-    Route::post('/categories/store', 'CategoryController@store')->name('admin.categories.store');
-    Route::get('/categories/all', 'CategoryController@index')->name('admin.categories.all');
-    Route::post('/items/store', 'ItemController@store')->name('admin.items.store');
-    Route::get('/items/all', 'ItemController@index')->name('admin.items.all');
-    Route::post('/order/create', 'OrdersController@addOrder')->name('admin.order.store');
-});
 
+    /*===================================================================================================*/
+    /*=====================================   Categories Routes   =======================================*/
+    /*===================================================================================================*/
+    Route::get('/categories/all', 'CategoryController@index')->name('admin.categories.all');
+    Route::post('/categories/store', 'CategoryController@store')->name('admin.categories.store');
+
+    /*===================================================================================================*/
+    /*=====================================   items Routes   =======================================*/
+    /*===================================================================================================*/
+    Route::get('/items/all', 'ItemController@index')->name('admin.items.all')->middleware('checkPermissions:get_item');
+    Route::post('/items/store', 'ItemController@store')->name('admin.items.store');
+
+    /*===================================================================================================*/
+    /*                                        Orders Routes                                              */
+    /*===================================================================================================*/
+    Route::post('/order/create', 'OrdersController@addOrder')->name('admin.order.store');
+
+    /*===================================================================================================*/
+    /*                                        Roles Routes                                              */
+    /*===================================================================================================*/
+});
+Route::post('/role/create', 'RoleController@store')->name('admin.role.store');
+
+/*===================================================================================================*/
+/*                                        Auth Routes                                              */
+/*===================================================================================================*/
 Route::post('/register', 'AuthController@register');
 Route::post('/login', 'AuthController@login');
 

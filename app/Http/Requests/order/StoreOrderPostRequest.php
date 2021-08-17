@@ -27,6 +27,8 @@ class StoreOrderPostRequest extends FormRequest
             'id' => 'required|array',
             'priceAfterDiscount' => 'required|array',
             'quantity' => 'required|array|min:1',
+            'status' => 'required',
+            'type' => 'required',
         ];
     }
 }
