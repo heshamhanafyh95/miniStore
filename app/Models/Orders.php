@@ -14,12 +14,12 @@ class Orders extends Model
         'type',
         'status',
         'discount',
-        'userId',
+        'user_id',
     ];
 
     public function items()
     {
-        return $this->belongsToMany(Item::class, 'order_items')
+        return $this->belongsToMany(Item::class, 'order_items', 'order_id', 'item_id')
             ->withPivot('price', 'quantity')->withTimestamps();
     }
 }
