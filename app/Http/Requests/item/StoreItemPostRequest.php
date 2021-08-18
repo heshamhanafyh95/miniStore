@@ -25,7 +25,7 @@ class StoreItemPostRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'categoryId' => 'required',
+            'category_id' => 'required',
             'tradePrice' => 'required',
             'customerPrice' => 'required',
             'minPrice' => 'required',
