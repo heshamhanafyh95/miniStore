@@ -20,14 +20,14 @@ class Item extends Model
         'image',
         'discount',
         'status',
-        'categoryId',
+        'category_id',
     ];
 
     public function order()
     {
-        return $this->belongsToMany(Orders::class,'order_items','orderId','itemId')->withPivot('price','quantity');
+        return $this->belongsToMany(Orders::class, 'order_items', 'orderId', 'itemId')->withPivot('price', 'quantity');
     }
-    
+
     public function category()
     {
         return $this->belongsTo(category::class);
