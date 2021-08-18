@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\role\StoreRolePostRequest;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use App\Services\role\RoleService;
 
 class RoleController extends Controller
 {
+    public function __construct(RoleService $roleService)
+    {
+        $this->roleService = $roleService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -33,12 +39,15 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRolePostRequest $request)
     {
-        $data = $request->all();
-        $data['permissionsJson'] = json_encode($data['permissionsJson']);
-        $role = Role::create($data);
-        return response()->json($role, 200);
+        try {
+            $result = $this->roleService->Create($request);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 400);
+        }
+
+        return response()->json($result, 200);
     }
 
     /**

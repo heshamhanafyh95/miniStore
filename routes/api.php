@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return response()->json(Auth::user()->has_permission("get_item"), 200);
+    // return response()->json(Auth::user()->has_permission("get_item"), 200);
 });
 
 
@@ -42,8 +42,8 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => ''], function () {
     /*===================================================================================================*/
     /*                                        Roles Routes                                              */
     /*===================================================================================================*/
+    Route::post('/role/create', 'RoleController@store');
 });
-Route::post('/role/create', 'RoleController@store');
 
 /*===================================================================================================*/
 /*                                        Auth Routes                                              */
