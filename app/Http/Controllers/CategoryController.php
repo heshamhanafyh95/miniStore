@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\category\StoreCategoryPostRequest;
 use App\Models\category;
-use App\Services\category\CategoryService;
+use App\Services\Category\CategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
