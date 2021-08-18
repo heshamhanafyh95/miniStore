@@ -29,7 +29,7 @@ class CategoryController extends Controller
         try {
             $category = $this->categoryService->Create($request);
         } catch (\Throwable $th) {
-            return response()->json($th, 400);
+            return response()->json($th->getMessage(), 400);
         }
 
         return response()->json($category, 200);
