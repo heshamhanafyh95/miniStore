@@ -3,7 +3,7 @@
 namespace App\Services\Category;
 
 use App\Http\Requests\category\StoreCategoryPostRequest;
-use App\Models\Category;
+use App\Models\category;
 
 
 
