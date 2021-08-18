@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\category\DeleteCategoryPostRequest;
 use App\Http\Requests\category\StoreCategoryPostRequest;
+use App\Http\Requests\category\UpdateCategoryPostRequest;
 use App\Models\category;
 use App\Services\Category\CategoryService;
 use Illuminate\Http\Request;
@@ -28,6 +30,28 @@ class CategoryController extends Controller
     {
         try {
             $category = $this->categoryService->Create($request);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 400);
+        }
+
+        return response()->json($category, 200);
+    }
+
+    public function update(UpdateCategoryPostRequest $request)
+    {
+        try {
+            $category = $this->categoryService->Update($request);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 400);
+        }
+
+        return response()->json($category, 200);
+    }
+
+    public function delete(DeleteCategoryPostRequest $request)
+    {
+        try {
+            $category = $this->categoryService->Delete($request);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 400);
         }

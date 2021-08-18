@@ -27,12 +27,16 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => ''], function () {
     /*===================================================================================================*/
     Route::get('/categories/all', 'CategoryController@index');
     Route::post('/categories/store', 'CategoryController@store');
+    Route::post('/categories/update', 'CategoryController@update');
+    Route::post('/categories/delete', 'CategoryController@delete');
 
     /*===================================================================================================*/
     /*=====================================   items Routes   =======================================*/
     /*===================================================================================================*/
     Route::get('/items/all', 'ItemController@index')->middleware('checkPermissions:get_item');
     Route::post('/items/store', 'ItemController@store');
+    Route::post('/items/update', 'ItemController@update');
+    Route::post('/items/delete', 'ItemController@delete');
 
     /*===================================================================================================*/
     /*                                        Orders Routes                                              */
