@@ -65,7 +65,7 @@ class OrderService
         $order->type = $type;
         $order->status = $status;
         $order->discount = $discount;
-        $order->userId = Auth::user()->id;
+        $order->user_id = Auth::user()->id;
         $order->save();
         return $order;
     }
