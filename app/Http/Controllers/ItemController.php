@@ -25,6 +25,15 @@ class ItemController extends Controller
         $items = Item::all();
         return response()->json($items, 200);
     }
+    public function show(Request $request)
+    {
+        try {
+            $item = Item::findOrFail($request->id);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 400);
+        }
+        return response()->json($item, 200);
+    }
 
     public function store(StoreItemPostRequest $request)
     {

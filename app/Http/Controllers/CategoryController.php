@@ -26,6 +26,15 @@ class CategoryController extends Controller
         $categories = category::all();
         return response()->json($categories, 200);
     }
+    public function show(Request $request)
+    {
+        try {
+            $category = category::findOrFail($request->id);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 400);
+        }
+        return response()->json($category, 200);
+    }
 
     public function store(StoreCategoryPostRequest $request)
     {

@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => ''], function () {
     /*=====================================   Categories Routes   =======================================*/
     /*===================================================================================================*/
     Route::get('/categories/all', 'CategoryController@index');
+    Route::get('/categories/show', 'CategoryController@show');
     Route::post('/categories/store', 'CategoryController@store');
     Route::post('/categories/update', 'CategoryController@update');
     Route::post('/categories/delete', 'CategoryController@delete');
@@ -34,6 +35,7 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => ''], function () {
     /*=====================================   items Routes   =======================================*/
     /*===================================================================================================*/
     Route::get('/items/all', 'ItemController@index')->middleware('checkPermissions:get_item');
+    Route::get('/items/show', 'ItemController@show');
     Route::post('/items/store', 'ItemController@store');
     Route::post('/items/update', 'ItemController@update');
     Route::post('/items/delete', 'ItemController@delete');
