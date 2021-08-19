@@ -22,13 +22,13 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         // $items = Item::paginate($request->perPage, ['*'], 'itemPage', $request->pageNumber);
-        $items = Item::all();
+        $items = Item::with(['category'])->all();
         return response()->json($items, 200);
     }
     public function show(Request $request)
     {
         try {
-            $item = Item::findOrFail($request->id);
+            $item = Item::with(['category'])->findOrFail($request->id);
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 400);
         }
