@@ -21,7 +21,8 @@ class ItemController extends Controller
 
     public function index(Request $request)
     {
-        $items = Item::paginate($request->perPage, ['*'], 'itemPage', $request->pageNumber);
+        // $items = Item::paginate($request->perPage, ['*'], 'itemPage', $request->pageNumber);
+        $items = Item::all();
         return response()->json($items, 200);
     }
 

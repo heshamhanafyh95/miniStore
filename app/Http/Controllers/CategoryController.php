@@ -22,7 +22,8 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
-        $categories = category::paginate($request->perPage, ['*'], 'categoryPage', $request->pageNumber);
+        // $categories = category::paginate($request->perPage, ['*'], 'categoryPage', $request->pageNumber);
+        $categories = category::all();
         return response()->json($categories, 200);
     }
 
