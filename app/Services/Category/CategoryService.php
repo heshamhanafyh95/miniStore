@@ -23,7 +23,9 @@ class CategoryService
         if ($data->hasFile('image')) {
             $imageName =  time() . '.' . $data->image->extension();
             $imagePath = 'storage/' . $data->image->storeAs('images/categories', $imageName);
-            $this->deleteOldPic($category->image);
+            if ($category) {
+                $this->deleteOldPic($category->image);
+            }
             return $imagePath;
         } elseif ($category) {
             return $category->image;

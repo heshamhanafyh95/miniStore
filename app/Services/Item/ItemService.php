@@ -23,7 +23,9 @@ class ItemService
         if ($data->hasFile('image')) {
             $imageName =  time() . '.' . $data->image->extension();
             $imagePath = 'storage/' . $data->image->storeAs('images/items', $imageName);
-            $this->deleteOldPic($item->image);
+            if ($item) {
+                $this->deleteOldPic($item->image);
+            }
             return $imagePath;
         } elseif ($item) {
             return $item->image;
