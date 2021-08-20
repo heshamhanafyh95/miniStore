@@ -73,14 +73,4 @@ class ItemController extends Controller
 
         return response()->json($item, 200);
     }
-
-    public function testItem(UpdateItemPutRequest $request)
-    {
-        $category = Item::findOrFail($request->id);
-        // return response()->json(explode("storage/", $category->image)[1]);
-        $pic = 'public' . parse_url($category->image)['path'];
-        if (Storage::exists($pic)) {
-            Storage::delete($pic);
-        }
-    }
 }
