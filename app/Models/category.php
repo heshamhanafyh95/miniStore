@@ -24,6 +24,6 @@ class category extends Model
 
     public function getImageAttribute($value)
     {
-        return url('storage/' . $value);
+        return url($value);
     }
 }

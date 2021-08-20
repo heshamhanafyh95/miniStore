@@ -6,7 +6,7 @@ use App\Http\Requests\item\DeleteItemPostRequest;
 use App\Http\Requests\item\StoreItemPostRequest;
 use App\Http\Requests\item\UpdateItemPutRequest;
 use App\Models\Item;
-
+use Illuminate\Support\Facades\Storage;
 
 class ItemService
 {
@@ -22,12 +22,21 @@ class ItemService
     {
         if ($data->hasFile('image')) {
             $imageName =  time() . '.' . $data->image->extension();
-            $imagePath = $data->image->storeAs('public/images/items', $imageName);
+            $imagePath = 'storage/' . $data->image->storeAs('images/items', $imageName);
+            $this->deleteOldPic($item->image);
             return $imagePath;
         } elseif ($item) {
             return $item->image;
         } else {
             return 'images/items/notFound.png';
+        }
+    }
+
+    public function deleteOldPic($image)
+    {
+        $pic = explode("storage/", $image)[1];
+        if (Storage::exists($pic)) {
+            Storage::delete($pic);
         }
     }
 

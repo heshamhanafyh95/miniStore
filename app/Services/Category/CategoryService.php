@@ -6,8 +6,7 @@ use App\Http\Requests\category\DeleteCategoryPostRequest;
 use App\Http\Requests\category\StoreCategoryPostRequest;
 use App\Http\Requests\category\UpdateCategoryPostRequest;
 use App\Models\category;
-
-
+use Illuminate\Support\Facades\Storage;
 
 class CategoryService
 {
@@ -23,12 +22,21 @@ class CategoryService
     {
         if ($data->hasFile('image')) {
             $imageName =  time() . '.' . $data->image->extension();
-            $imagePath = $data->image->storeAs('public/images/categories', $imageName);
+            $imagePath = 'storage/' . $data->image->storeAs('images/categories', $imageName);
+            $this->deleteOldPic($category->image);
             return $imagePath;
         } elseif ($category) {
             return $category->image;
         } else {
             return 'images/categories/notFound.png';
+        }
+    }
+
+    public function deleteOldPic($image)
+    {
+        $pic = explode("storage/", $image)[1];
+        if (Storage::exists($pic)) {
+            Storage::delete($pic);
         }
     }
 

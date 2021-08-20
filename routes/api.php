@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => ''], function () {
     /*===================================================================================================*/
     Route::get('/items/all', 'ItemController@index')->middleware('checkPermissions:get_item');
     Route::get('/items/show', 'ItemController@show');
+    Route::post('/items/testItem', 'ItemController@testItem');
     Route::post('/items/store', 'ItemController@store');
     Route::post('/items/update', 'ItemController@update');
     Route::post('/items/delete', 'ItemController@delete');

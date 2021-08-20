@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\item\DeleteItemPostRequest;
 use App\Http\Requests\item\StoreItemPostRequest;
 use App\Http\Requests\item\UpdateItemPutRequest;
+use App\Models\category;
 use App\Models\Item;
 use App\Services\Item\ItemService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
@@ -70,5 +72,15 @@ class ItemController extends Controller
         }
 
         return response()->json($item, 200);
+    }
+
+    public function testItem(UpdateItemPutRequest $request)
+    {
+        $category = Item::findOrFail($request->id);
+        // return response()->json(explode("storage/", $category->image)[1]);
+        $pic = 'public' . parse_url($category->image)['path'];
+        if (Storage::exists($pic)) {
+            Storage::delete($pic);
+        }
     }
 }

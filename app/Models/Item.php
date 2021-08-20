@@ -36,6 +36,6 @@ class Item extends Model
 
     public function getImageAttribute($value)
     {
-        return url('storage/' . $value);
+        return url($value);
     }
 }
