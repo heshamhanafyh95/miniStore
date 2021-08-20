@@ -22,7 +22,7 @@ class ItemService
     {
         if ($data->hasFile('image')) {
             $imageName =  time() . '.' . $data->image->extension();
-            $imagePath = $data->image->storeAs('images/items', $imageName);
+            $imagePath = $data->image->storeAs('public/images/items', $imageName);
             return $imagePath;
         } elseif ($item) {
             return $item->image;

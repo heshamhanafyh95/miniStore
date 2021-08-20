@@ -23,6 +23,7 @@ class Item extends Model
         'category_id',
     ];
 
+
     public function order()
     {
         return $this->belongsToMany(Orders::class, 'order_items', 'orderId', 'itemId')->withPivot('price', 'quantity');
@@ -31,5 +32,10 @@ class Item extends Model
     public function category()
     {
         return $this->belongsTo(category::class);
+    }
+
+    public function getImageAttribute($value)
+    {
+        return url('storage/' . $value);
     }
 }

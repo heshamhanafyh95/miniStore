@@ -23,7 +23,7 @@ class CategoryService
     {
         if ($data->hasFile('image')) {
             $imageName =  time() . '.' . $data->image->extension();
-            $imagePath = $data->image->storeAs('images/categories', $imageName);
+            $imagePath = $data->image->storeAs('public/images/categories', $imageName);
             return $imagePath;
         } elseif ($category) {
             return $category->image;
